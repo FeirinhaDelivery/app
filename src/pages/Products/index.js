@@ -6,7 +6,7 @@ const Sobre = ({navigation}) => {
   return (
     <>
       <View style={styles.center}>
-        <Text>This is the sobre screen</Text>
+        <Text>Página Produtos</Text>
         <Button
           title="Go to About Screen"
           onPress={() => navigation.navigate('Home')}

@@ -1,28 +1,29 @@
 import React from 'react';
-import {View, Button, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
+
+import Slideshow from '../../components/Slideshow';
 import Footer from '../../components/Footer';
 
 const Home = ({navigation}) => {
   return (
     <>
-      <View style={styles.center}>
-        <Text>This is the home screen</Text>
-        <Button
-          title="Go to About Screen"
-          onPress={() => navigation.navigate('About')}
-        />
-      </View>
-      <Footer />
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <Slideshow />
+          <Text style={styles.altura}> This is the home screen</Text>
+          <Footer />
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  center: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+  },
+  altura: {
+    height: 400,
   },
 });
 
