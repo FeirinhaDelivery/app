@@ -13,6 +13,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Home from '../pages/Home';
 import Products from '../pages/Products';
+import Manifest from '../pages/Manifest';
+import Subscriptions from '../pages/Subscriptions';
 
 const Stack = createStackNavigator();
 
@@ -93,6 +95,80 @@ const ProductsStackNavigator = ({navigation}) => {
   );
 };
 
+const ManifestStackNavigator = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTitle: () => (
+          <Image style={styles.tinyLogo} source={Images.profile.logo} />
+        ),
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#B0C861',
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+            <Icon name="bars" style={styles.menu} size={30} />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <View style={styles.direc}>
+            <TouchableOpacity>
+              <Icon name="user" style={styles.icon} size={30} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Icon
+                name="shopping-bag"
+                style={styles.icon}
+                size={30}
+                color="black"
+              />
+            </TouchableOpacity>
+          </View>
+        ),
+      }}>
+      <Stack.Screen name="Manifesto" component={Manifest} />
+    </Stack.Navigator>
+  );
+};
+
+const SubscriptionsStackNavigator = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTitle: () => (
+          <Image style={styles.tinyLogo} source={Images.profile.logo} />
+        ),
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#B0C861',
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+            <Icon name="bars" style={styles.menu} size={30} />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <View style={styles.direc}>
+            <TouchableOpacity>
+              <Icon name="user" style={styles.icon} size={30} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Icon
+                name="shopping-bag"
+                style={styles.icon}
+                size={30}
+                color="black"
+              />
+            </TouchableOpacity>
+          </View>
+        ),
+      }}>
+      <Stack.Screen name="Assinaturas" component={Subscriptions} />
+    </Stack.Navigator>
+  );
+};
+
 const styles = StyleSheet.create({
   direc: {
     flexDirection: 'row',
@@ -118,4 +194,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export {MainStackNavigator, ProductsStackNavigator};
+export {
+  MainStackNavigator,
+  ProductsStackNavigator,
+  ManifestStackNavigator,
+  SubscriptionsStackNavigator,
+};
