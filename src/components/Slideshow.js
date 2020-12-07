@@ -1,14 +1,8 @@
+/* eslint-disable no-shadow */
 import React, {useCallback, memo, useRef, useState} from 'react';
-import {
-  FlatList,
-  View,
-  Dimensions,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import {FlatList, View, Dimensions, StyleSheet, Image} from 'react-native';
 
-const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
+const {width: windowWidth} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   slide: {
