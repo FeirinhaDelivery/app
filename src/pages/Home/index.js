@@ -1,19 +1,19 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
+import {ScrollView, Text, StyleSheet} from 'react-native';
 
 import Slideshow from '../../components/Slideshow';
+import Categories from '../../components/Category';
 import Footer from '../../components/Footer';
 
 const Home = ({navigation}) => {
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          <Slideshow />
-          <Text style={styles.altura}> This is the home screen</Text>
-          <Footer />
-        </ScrollView>
-      </SafeAreaView>
+      <ScrollView>
+        <Slideshow />
+        <Categories />
+        <Text style={styles.altura}> This is the home screen</Text>
+        <Footer />
+      </ScrollView>
     </>
   );
 };
