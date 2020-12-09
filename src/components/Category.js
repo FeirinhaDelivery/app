@@ -1,33 +1,72 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 
 import api from '../service/api';
 import {useCategory} from '../context/Category';
+import {useOffset} from '../context/Offset';
 
-export default function Category() {
+export default function Category({main}) {
   const [categories, setCategories] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const {setCodCategory} = useCategory();
+  const {setOffset} = useOffset();
 
   useEffect(() => {
+    setLoading(true);
     api.get('categories').then((response) => {
       setCategories(response.data.items);
+      setLoading(false);
     });
   }, []);
 
   return (
     <>
-      <View style={styles.container}>
-        {categories.map((category) => (
-          <TouchableOpacity
-            onPress={() => setCodCategory(category.id)}
-            key={category.id}>
-            <View style={[styles.category, styles[category.name]]}>
-              <Image style={[styles.image]} source={{uri: category.imageUrl}} />
-              <Text style={styles.text}>{category.name}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
+      {isLoading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#B0C861" />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          {main ? (
+            <TouchableOpacity
+              onPress={() => {
+                setOffset(0);
+              }}
+              key={1}>
+              <View style={[styles.category, styles.Ofertas]}>
+                <Image
+                  style={[styles.image]}
+                  source={require('../images/icon-oferta.png')}
+                />
+                <Text style={styles.text}>Ofertas</Text>
+              </View>
+            </TouchableOpacity>
+          ) : null}
+          {categories.map((category) => (
+            <TouchableOpacity
+              onPress={() => {
+                setCodCategory(category.id);
+                setOffset(0);
+              }}
+              key={category.id}>
+              <View style={[styles.category, styles[category.name]]}>
+                <Image
+                  style={[styles.image]}
+                  source={{uri: category.imageUrl}}
+                />
+                <Text style={styles.text}>{category.name}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
     </>
   );
 }
@@ -38,6 +77,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginHorizontal: 5,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   category: {
     flex: 0,

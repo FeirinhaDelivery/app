@@ -29,7 +29,7 @@ const Products = ({...props}) => {
   });
 
   useEffect(() => {
-    if (state.limit > offset) {
+    if (state.limit > offset || state.limit === 0) {
       setLoading(true);
       let url =
         codCategory > 0
@@ -37,14 +37,13 @@ const Products = ({...props}) => {
           : 'products?limit=10&offset=0&enabled=true&sortBy=NAME_ASC';
 
       api.get(url).then((response) => {
+        setState({limit: response.data.total});
         if (offset === 0) {
           setProducts(response.data.items);
-          setLoading(false);
         } else {
           setProducts([...products, ...response.data.items]);
-          setState({limit: response.data.total});
-          setLoading(false);
         }
+        setLoading(false);
       });
     }
   }, [codCategory, offset]);

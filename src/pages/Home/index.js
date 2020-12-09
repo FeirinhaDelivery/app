@@ -10,7 +10,7 @@ const Home = ({navigation}) => {
     <>
       <ScrollView>
         <Slideshow />
-        <Categories />
+        <Categories main={true} />
         <Text style={styles.altura}> This is the home screen</Text>
         <Footer />
       </ScrollView>
