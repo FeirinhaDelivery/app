@@ -6,7 +6,12 @@ const images = {
   manifest: {
     muitos: require('./manifesto-mobile.833eee1d.png'),
     assinaturas: require('./banner-assine-mobile.58dd3ce4.png'),
-    comunidade: require('./bg-whatsapp-mobile.33d2976f.png'),
+    comunidade: {
+      uri: require('./bg-whatsapp-mobile.33d2976f.png'),
+    },
+  },
+  subscriptions: {
+    subscriptions: require('./banner-assinatura-mobile.b96574b1.png'),
   },
 };
 
