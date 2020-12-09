@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import React, {useCallback, memo, useRef, useState} from 'react';
 import {FlatList, View, Dimensions, StyleSheet, Image} from 'react-native';
+import Images from '../images';
 
 const {width: windowWidth} = Dimensions.get('window');
 
@@ -34,10 +35,10 @@ const styles = StyleSheet.create({
   carousel: {flex: 1},
 });
 
-const slideList = Array.from({length: 3}).map((_, i) => {
+const slideList = Array.from({length: 1}).map((_, i) => {
   return {
     id: i,
-    image: `https://picsum.photos/1440/2842?random=${i}`,
+    image: 'https://feirinha.delivery/static/media/banner-mobile.3fc6acc4.png',
     title: `This is the title ${i + 1}!`,
     subtitle: `This is the subtitle ${i + 1}!`,
   };
