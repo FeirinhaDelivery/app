@@ -8,6 +8,7 @@ import {
   Image,
   Text,
   FlatList,
+  ScrollView,
 } from 'react-native';
 
 import api from '../../service/api';
@@ -16,6 +17,19 @@ import {useOffset} from '../../context/Offset';
 import {useCategory} from '../../context/Category';
 import Categories from '../../components/Category';
 import Footer from '../../components/Footer';
+
+const renderItem = ({item: product}) => (
+  <View style={styles.product}>
+    <Image style={[styles.image]} source={{uri: product.hdThumbnailUrl}} />
+    <View style={styles.productText}>
+      <Text style={styles.text}>{product.name}</Text>
+      <Text style={styles.price}>{product.defaultDisplayedPriceFormatted}</Text>
+    </View>
+    <View>
+      <Text style={styles.text}>opcoes</Text>
+    </View>
+  </View>
+);
 
 const Products = ({...props}) => {
   const {codCategory} = useCategory();
@@ -59,33 +73,27 @@ const Products = ({...props}) => {
           <View style={styles.loading}>
             <ActivityIndicator size="large" color="#B0C861" />
           </View>
-        ) : (
+        ) : products.length > 0 ? (
           <FlatList
-            data={products}
-            keyExtractor={(product) => product.id.toString()}
             style={styles.scrollStyle}
-            renderItem={({item: product}) => (
-              <View style={styles.product}>
-                <Image
-                  style={[styles.image]}
-                  source={{uri: product.hdThumbnailUrl}}
-                />
-                <View style={styles.productText}>
-                  <Text style={styles.text}>{product.name}</Text>
-                  <Text style={styles.price}>
-                    {product.defaultDisplayedPriceFormatted}
-                  </Text>
-                </View>
-                <View>
-                  <Text style={styles.text}>opcoes</Text>
-                </View>
-              </View>
-            )}
+            data={products}
+            renderItem={renderItem}
+            keyExtractor={(product) => product.id.toString()}
             ListFooterComponent={<Footer />}
             ListHeaderComponent={<Categories />}
             onEndReached={loadRepositories}
             onEndReachedThreshold={0.1}
           />
+        ) : (
+          <ScrollView>
+            <View style={styles.noProduct}>
+              <Categories />
+              <Text style={styles.noText}>
+                Esta categoria não contem produtos!
+              </Text>
+            </View>
+            <Footer />
+          </ScrollView>
         )}
       </SafeAreaView>
     </>
@@ -133,6 +141,16 @@ const styles = StyleSheet.create({
   },
   mb: {
     marginBottom: 20,
+  },
+  noProduct: {
+    flex: 1,
+    marginTop: 15,
+    height: 350,
+  },
+  noText: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingBottom: 70,
   },
 });
 
