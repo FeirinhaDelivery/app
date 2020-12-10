@@ -3,6 +3,7 @@ import {ScrollView, Text, StyleSheet} from 'react-native';
 
 import Slideshow from '../../components/Slideshow';
 import Categories from '../../components/Category';
+import Products from '../../components/SlideProducts';
 import Footer from '../../components/Footer';
 
 const Home = ({navigation}) => {
@@ -11,7 +12,11 @@ const Home = ({navigation}) => {
       <ScrollView>
         <Slideshow />
         <Categories main={true} />
-        <Text style={styles.altura}> This is the home screen</Text>
+        <Products title="Ofertas" category="0" />
+        <Products title="Frutas" category="51814491" />
+        <Products title="Legumes" category="51824438" />
+        <Products title="Verduras" category="51827393" />
+        <Products title="Diversos" category="51814492" />
         <Footer />
       </ScrollView>
     </>
@@ -21,9 +26,6 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  altura: {
-    height: 400,
   },
 });
 
